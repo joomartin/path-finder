@@ -1,0 +1,22 @@
+{
+    "name": "path-finder",
+    "description": "PHP path finder package",
+    "version": "0.1.0",
+    "authors": [
+        {
+            "email": "m4rt1n.j00@gmail.com",
+            "name": "Martin Joó",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "PathFinder\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PathFinder\\Tests\\": "tests/"
+        }
+    }
+}
