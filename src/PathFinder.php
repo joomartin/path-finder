@@ -11,7 +11,7 @@ class PathFinder
      */
     public function __construct(string $path = null) 
     {
-        $this->path = $this->here($path);
+        $this->here($path);
     }
 
     /**
