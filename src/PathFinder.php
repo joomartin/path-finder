@@ -132,8 +132,13 @@ class PathFinder
         return $path ? $path : getcwd();
     }
 
+    public function path()
+    {
+        return $this->path;   
+    }
+
     public function __toString()
     {
-        return $this->path;
+        return $this->path();
     }
 }
