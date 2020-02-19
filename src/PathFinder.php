@@ -98,12 +98,18 @@ class PathFinder
     {
         $parts = $this->getParts();
         $prefix = '';
+
+        // like /Users...
+        if (strpos($this->path, DIRECTORY_SEPARATOR) === 0) 
+            $prefix = DIRECTORY_SEPARATOR;
         
         foreach ($parts as $part) {
             if (empty($part)) continue;
 
             $fullPath = $prefix . $part;
-            if (!is_dir($fullPath))
+
+            // not exists and directory
+            if (!file_exists($fullPath) && !pathinfo($fullPath, PATHINFO_EXTENSION))
                 mkdir($fullPath);
 
             $prefix = $fullPath . DIRECTORY_SEPARATOR;

@@ -7,13 +7,13 @@ use PathFinder\PathFinder;
 $pf = new PathFinder;
 
 $pf
-    ->here('Users/joomartin')
+    ->here('/Users/joomartin')
     ->goto('code')
     ->goto('path-finder')
     ->goto('some')
     ->goto('dir')
-    ->mix('path-finder', '/Users/user/path-finder');
-    // ->createRecursive();
+    ->mix('path-finder', '/Users/joomartin/path-finder')
+    ->createRecursive();
 echo $pf;
 // var_dump($pf->getFirst());
 // var_dump($pf->getLast());
