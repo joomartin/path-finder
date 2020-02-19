@@ -17,11 +17,20 @@ class PathFinder
 
     public function cd(string $dir = null)
     {
-        if ($dir == '.') 
+        if ($dir == '.') {
             $this->path = getcwd();
+            return $this;
+        }
 
-        if ($dir == '..')
+        if ($dir == '..') {
             return $this->up();
+        }
+
+        // Absolute path
+        if (strpos($dir, DIRECTORY_SEPARATOR) === 0) {
+            $this->path = $dir;
+            return $this;
+        }
 
         $this->path = !$this->path 
             ? $dir

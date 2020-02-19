@@ -13,7 +13,8 @@ $pwd = $pf
     ->cd('some')
     ->cd('dir')
     ->mix('path-finder', '/Users/joomartin/path-finder')
-    ->mkdir()
+    ->cd('/Applications/MAMP')
+    // ->mkdir()
     ->pwd();
 var_dump($pwd);
 var_dump($pf->first());
