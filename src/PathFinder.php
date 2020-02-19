@@ -11,23 +11,22 @@ class PathFinder
      */
     public function __construct(string $path = null) 
     {
-        $this->here($path);
+        if ($path)
+            $this->cd($path);
     }
 
-    /**
-     * Synonym for constructor
-     * 
-     * @see self::__construct
-     */
-    public function here(string $path = null)
+    public function cd(string $dir = null)
     {
-        $this->path = $this->currentWorkindDir($path);
-        return $this;
-    }
+        if ($dir == '.') 
+            $this->path = getcwd();
 
-    public function goto(string $dir)
-    {
-        $this->path = $this->path . DIRECTORY_SEPARATOR . $dir;
+        if ($dir == '..')
+            return $this->up();
+
+        $this->path = !$this->path 
+            ? $dir
+            : $this->path . DIRECTORY_SEPARATOR . $dir;
+
         return $this;
     }
 
@@ -65,16 +64,35 @@ class PathFinder
         return $this->up();   
     }
 
-    public function getFirst()
+    public function first()
     {
         $parts = $this->getParts();
-        return $parts[0];
+
+        // @TODO /Users.. esetén az első elem null lesz 
+        return !$parts[0]
+            ? $parts[1]
+            : $parts[0];
     }
 
-    public function getLast()
+    public function last()
     {
         $parts = $this->getParts();
         return $parts[count($parts) - 1];
+    }
+
+    public function pwd()
+    {
+        return $this->path;   
+    }
+
+    public function cwd()
+    {
+        return $this->pwd();   
+    }
+
+    public function __toString()
+    {
+        return $this->pwd();
     }
 
     /**
@@ -94,7 +112,7 @@ class PathFinder
         return $this;
     }
 
-    public function createRecursive()
+    public function mkdir()
     {
         $parts = $this->getParts();
         $prefix = '';
@@ -115,6 +133,8 @@ class PathFinder
 
             $prefix = $fullPath . DIRECTORY_SEPARATOR;
         }
+
+        return $this;
     }
 
     /**
@@ -130,15 +150,5 @@ class PathFinder
     protected function currentWorkindDir(string $path = null) 
     {
         return $path ? $path : getcwd();
-    }
-
-    public function path()
-    {
-        return $this->path;   
-    }
-
-    public function __toString()
-    {
-        return $this->path();
     }
 }
