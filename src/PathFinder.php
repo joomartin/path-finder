@@ -100,9 +100,10 @@ class PathFinder
         $prefix = '';
 
         // like /Users...
-        if (strpos($this->path, DIRECTORY_SEPARATOR) === 0) 
-            $prefix = DIRECTORY_SEPARATOR;
-        
+        $prefix = (strpos($this->path, DIRECTORY_SEPARATOR) === 0) 
+            ? DIRECTORY_SEPARATOR
+            : $prefix;
+
         foreach ($parts as $part) {
             if (empty($part)) continue;
 
